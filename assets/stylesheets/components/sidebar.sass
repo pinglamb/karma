@@ -1,0 +1,89 @@
+#sidebar
+  height: 100%
+  overflow: auto
+  h1
+    font-size: 12px
+    line-height: 22px
+    color: #555
+    font-weight: bold
+    border-bottom: 1px solid #ddd
+    padding: 24px 0 5px
+    margin: 0 30px
+    a
+      color: #555
+  ul
+    list-style: none
+    margin: 0
+    padding: 10px 15px
+    text-indent: 0
+    > li
+      height: 35px
+      margin: 0
+      padding: 0
+      border-left: 3px solid transparent
+      > a
+        display: block
+        padding: 9px 52px 9px 13px
+        text-decoration: none
+        color: #555
+        font-size: 12px
+        +ellipsisify
+        > span.count
+          position: absolute
+          right: 30px
+          width: 40px
+          float: right
+          color: #555
+          text-align: right
+          font-size: 12px
+          padding: 1px 2px
+          opacity: 1
+      &.active, &:hover
+        background-color: #ebebeb
+      &.active
+        > a
+          font-weight: bold
+          color: #333
+          > span.count
+            font-weight: bold
+            color: #333
+      &.disabled
+        > a
+          color: #999
+          > span.count
+            color: #999
+
+#sidebar-right
+  position: fixed
+  top: 0
+  right: 0
+  width: 330px
+  height: 100%
+  overflow: auto
+  background-color: #f8f8f8
+  border-left: 1px solid #d5d5d5
+  padding-top: $navbar-height
+  .panel
+    border: none
+    border-top: 1px solid #ddd
+    border-bottom: 1px solid #ddd
+    box-shadow: none
+    border-radius: 0
+    &:first-child
+      border-top: none
+    .panel-body
+      .form-group
+        margin-left: 0
+        margin-right: 0
+        label
+          margin-bottom: 5px
+        p
+          font-size: 12px
+          margin: 0
+    .panel-table
+      table
+        margin-bottom: 0
+        ul
+          padding-left: 15px
+          ul
+            padding-left: 15px

@@ -1,0 +1,55 @@
+table.table
+  thead, tbody, tfoot
+    th, td
+      color: #555
+      font-size: 11px
+      border-bottom: 1px solid #ddd
+      letter-spacing: 0.25px
+    .leading, .trailing
+      width: 15px
+      border-bottom-color: transparent
+    tr
+      &:hover
+        td
+          border-bottom-color: #ddd
+          background-color: #f3f3f3
+      &.text-muted
+        th, td
+          color: #999
+          font-style: italic
+    th, td
+      &.actions
+        text-align: right
+        a
+          display: inline-block
+          font-size: 24px
+          color: #ccc
+          margin-left: 5px
+          &.success:hover
+            color: $brand-success
+          &.danger:hover
+            color: $brand-danger
+  &.table-list
+    .item-info
+      position: relative
+      display: block
+      min-height: 50px
+      .image
+        width: 50px
+        height: 50px
+        position: absolute
+        left: 0
+        top: 0
+      .name
+        margin-left: 60px
+        max-width: 300px
+      .url
+        color: #999
+        max-width: 100%
+        display: inline-block
+        +ellipsisify
+
+.panel
+  table tbody tr
+    &:hover td
+      background-color: transparent

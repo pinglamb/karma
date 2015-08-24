@@ -7,3 +7,7 @@
 /pkg/
 /spec/reports/
 /tmp/
+/assets/external/bootstrap/
+/assets/external/fontawesome/
+/assets/external/google-code-prettify/
+/assets/external/jquery/

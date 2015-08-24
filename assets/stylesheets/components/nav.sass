@@ -1,0 +1,32 @@
+nav.navbar.navbar-lg
+  .dropdown-menu
+    min-width: 300px
+    > li
+      &.disabled
+        > a
+          padding: 0 10px 3px
+          cursor: inherit
+          color: $grey500
+
+.nav-sub
+  padding: 5px 10px
+  border-bottom: 1px solid #ddd
+  > a.active
+    color: $grey900
+    font-weight: bold
+  > span
+    color: #ddd
+  > small
+    color: $grey700
+
+.nav
+  &.nav-padded
+    margin-bottom: 20px
+
+.nav.nav-tabs
+  margin-bottom: 10px
+  li > a
+    font-size: 12px
+    font-weight: bold
+    > span.label
+      margin-left: 5px

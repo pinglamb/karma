@@ -1,0 +1,144 @@
+form
+  select.form-control
+    -webkit-appearance: none
+    &[multiple='multiple']
+      height: 240px
+
+  .form-control, .wysiwyg-editor, select.form-control
+    font-size: 13px
+    border-radius: 0
+    box-shadow: none
+    &:focus
+      box-shadow: none
+
+  .input-group
+    .input-group-btn > a
+      border-radius: 0
+
+  .wysiwyg-editor
+    padding: 6px 12px
+
+  .form-section
+    position: relative
+    border: 1px solid $grey300
+    margin-bottom: 24px
+    padding: 15px
+    &.form-error
+      border-color: $brand-danger
+    &.active
+      border-color: $brand-info
+
+  .form-group
+    .form-group
+      margin-bottom: 0
+
+  .form-actions
+    margin-bottom: 15px
+    &.text-right
+      > .btn
+        margin-left: 5px
+
+  label.control-label
+    font-size: 12px
+  .help-block
+    font-size: 12px
+
+  table.table-form
+    margin-bottom: 30px
+    .nested-fields
+      .form-group
+        margin: 0
+        padding: 0
+        label
+          display: none
+        .help-block
+          margin-bottom: 0
+      input[type=checkbox]
+        margin-top: 10px
+      .text
+        padding-top: 8px
+    div.nested-fields
+      margin-bottom: 5px
+      &:last-child
+        margin-bottom: 0
+    a.remove_fields, .table-action
+      display: block
+      margin-top: 4px
+      font-size: 16px
+
+  .category-select
+    display: inline-block
+    margin: 5px 0
+    &:nth-child(n+2)
+      margin-left: 12px
+      &:before
+        content: '/'
+        color: #ccc
+        margin-right: 6px
+
+  .attachment
+    margin-bottom: 10px
+    &.sortable-ghost
+      opacity: 0.15
+    .thumbnail
+      position: relative
+      margin-bottom: 4px
+      text-decoration: none
+      &.disabled
+        opacity: 0.55
+      .preview
+        width: 100%
+        height: 239px
+      .overlay
+        position: absolute
+        top: 4px
+        left: 4px
+        width: 239px
+        height: 239px
+        background-color: rgba(0, 0, 0, 0.55)
+        h3
+          line-height: 200px
+          text-align: center
+          color: #fff
+      input[type=file]
+        position: absolute
+        left: 0
+        top: 0
+        width: 100%
+        height: 100%
+        opacity: 0.01
+    // FIXME This part is deal specific
+    &.main-image
+      .thumbnail
+        width: 770px
+        max-width: 100%
+      .preview, .overlay
+        width: 760px
+        height: 435px
+        max-width: 100%
+      &.main-image-lg
+        .thumbnail
+          width: 1000px
+        .preview, .overlay
+          width: 990px
+          height: 430px
+    &.box-image
+      .thumbnail
+        width: 438px
+      .preview, .overlay
+        width: 428px
+        height: 434px
+    &.brand-image
+      .thumbnail
+        width: 110px
+      .preview, .overlay
+        width: 100px
+        height: 100px
+
+#search-form
+  &.form-inline
+    display: inline-block
+    .form-search
+      margin-top: 0
+    .daterange
+      width: 240px

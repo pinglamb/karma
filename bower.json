@@ -1,0 +1,12 @@
+{
+  "name": "zen-admin dependencies",
+  "dependencies": {
+    "holderjs": "2.6.1",
+    "underscore": "latest",
+    "jquery-form": "latest",
+    "bootstrap-switch": "latest",
+    "bootstrap-wysiwyg-steveathon": "1.0.3-beta",
+    "bootstrap-daterangepicker": "latest",
+    "bootstrap-file-input": "latest"
+  }
+}
