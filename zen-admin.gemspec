@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'zen/admin/version'
+require 'zen-admin/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "zen-admin"
-  spec.version       = Zen::Admin::VERSION
+  spec.version       = ZenAdmin::VERSION
   spec.authors       = ["pinglamb"]
   spec.email         = ["pinglambs@gmail.com"]
 
