@@ -14,10 +14,10 @@ inject_into_file 'Gemfile', %Q{\ngem 'nprogress-rails'}, after: /gem 'turbolinks
 gsub_file 'Gemfile', "gem 'jbuilder'", "# gem 'jbuilder'"
 
 dev_lib = %w(quiet_assets better_errors binding_of_caller rb-fsevent).collect {|lib| %Q{\ngem '#{lib}'}}.join
-gsub_file 'Gemfile', "#{dev_lib}\n", after: /gem 'spring'.*/
+inject_into_file 'Gemfile', "#{dev_lib}\n", after: /gem 'spring'.*/
 
 test_lib = %w(rspec-rails factory_girl_rails capybara database_cleaner simplecov email_spec rails-erd nyan-cat-formatter spring-commands-rspec timecop).collect {|lib| %Q{\ngem '#{lib}'}}.join
-gsub_file 'Gemfile', test_lib, after: /gem 'spring'.*/
+inject_into_file 'Gemfile', test_lib, after: /gem 'spring'.*/
 
 run 'bundle install'
 
@@ -91,7 +91,7 @@ remove_file 'app/helpers/application_helper.rb'
 create_file 'app/helpers/application_helper.rb', <<-RUBY
 module ApplicationHelper
   def namespace_name
-    controller_path.scan(/(.*)\//).flatten.first
+    controller_path.scan(/(.*)\\//).flatten.first
   end
 
   def match_namespace?(*args)
@@ -125,7 +125,7 @@ module ApplicationHelper
   def match_route?(*args)
     args.flatten! if args.is_a?(Array)
     Array.wrap(args).any? do |combination|
-      if m = combination.match(/^((?<namespace>.*)\/)?(?<controller>.*)\#(?<action>.*)$/)
+      if m = combination.match(/^((?<namespace>.*)\\/)?(?<controller>.*)\\#(?<action>.*)$/)
         (m[:namespace].blank? || match_namespace?(m[:namespace])) &&
           match_controller?(m[:controller]) &&
           match_action?(m[:action])
@@ -153,7 +153,7 @@ module ApplicationHelper
     if image.present?
       image_tag options[:url] || image, options
     else
-      content_tag :img, nil, { data: { src: "holder.js/\#{options[:fallback]}/text::(" } }.merge(options)
+      content_tag :img, nil, { data: { src: "holder.js/\\\#{options[:fallback]}/text::(" } }.merge(options)
     end
   end
 
@@ -182,7 +182,7 @@ module ApplicationHelper
   def result_of(predicates)
     if predicates.is_a?(Hash)
       predicates.all? do |k, v|
-        send(:"match_\#{k}?", v)
+        send(:"match_\\\#{k}?", v)
       end
     else
       predicates
@@ -236,7 +236,7 @@ inject_into_file ".gitignore", "\n/config/database.yml", :after => "/.bundle"
 inject_into_file ".gitignore", "\n.DS_Store", :after => "/.bundle"
 run "cp config/database.yml config/database.yml.example"
 
-gsub_file '.rspec', "--color", "--color --format NyanCatFormatter"
+gsub_file '.rspec', '--color', '--color --format NyanCatFormatter'
 
 run 'mkdir -p app/views/layouts/shared'
 create_file 'app/views/layouts/shared/_bootstrap_flash.html.slim', <<-SLIM
