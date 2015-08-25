@@ -1,5 +1,6 @@
 run "rbenv local #{`rbenv global`}"
 
+inject_into_file 'Gemfile', %Q{\ngem 'zen-admin', github: 'pinglamb/zen-admin'}, after: /gem 'therubyracer'.*/
 assets_lib = %w(bourbon bootstrap-sass font-awesome-rails bower-rails).collect {|lib| %Q{\ngem '#{lib}'}}.join
 inject_into_file 'Gemfile', assets_lib, after: /gem 'therubyracer'.*/
 inject_into_file 'Gemfile', %Q{\n# Other Assets}, after: /gem 'therubyracer'.*/
@@ -13,10 +14,9 @@ inject_into_file 'Gemfile', %Q{\ngem 'nprogress-rails'}, after: /gem 'turbolinks
 
 gsub_file 'Gemfile', "gem 'jbuilder'", "# gem 'jbuilder'"
 
-dev_lib = %w(quiet_assets better_errors binding_of_caller rb-fsevent).collect {|lib| %Q{\ngem '#{lib}'}}.join
-inject_into_file 'Gemfile', "#{dev_lib}\n", after: /gem 'spring'.*/
-
-test_lib = %w(rspec-rails factory_girl_rails capybara database_cleaner simplecov email_spec rails-erd nyan-cat-formatter spring-commands-rspec timecop).collect {|lib| %Q{\ngem '#{lib}'}}.join
+dev_lib = %w(quiet_assets better_errors binding_of_caller rb-fsevent).collect {|lib| %Q{\n  gem '#{lib}'}}.join
+inject_into_file 'Gemfile', "\n#{dev_lib}", after: /gem 'spring'.*/
+test_lib = %w(rspec-rails factory_girl_rails capybara database_cleaner simplecov email_spec rails-erd nyan-cat-formatter spring-commands-rspec timecop).collect {|lib| %Q{\n  gem '#{lib}'}}.join
 inject_into_file 'Gemfile', test_lib, after: /gem 'spring'.*/
 
 run 'bundle install'
@@ -50,7 +50,7 @@ html(lang="en")
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
-    title= content_for?(:title) ? yield(:title) : "#{@app_name}"
+    title= content_for?(:title) ? yield(:title) : "#{@app_name.capitalize}"
     = csrf_meta_tags
     = stylesheet_link_tag "application", media: "all"
     /! Le HTML5 shim, for IE6-8 support of HTML elements
@@ -63,7 +63,7 @@ html(lang="en")
     nav.navbar.navbar-inverse.navbar-fixed-top
       .container-fluid
         .navbar-header
-          = link_to "#{@app_name}", root_path, class: 'navbar-brand'
+          = link_to "#{@app_name.capitalize}", root_path, class: 'navbar-brand'
         ul.nav.navbar-nav.navbar-right
           = render 'layouts/shared/you'
 
@@ -182,7 +182,7 @@ module ApplicationHelper
   def result_of(predicates)
     if predicates.is_a?(Hash)
       predicates.all? do |k, v|
-        send(:"match_\\\#{k}?", v)
+        send(:"match_\#{k}?", v)
       end
     else
       predicates
@@ -190,6 +190,9 @@ module ApplicationHelper
   end
 end
 RUBY
+
+run 'mkdir -p app/assets/javascripts/components && touch app/assets/javascripts/components/.gitkeep'
+run 'mkdir -p app/assets/javascripts/pages && touch app/assets/javascripts/components/.gitkeep'
 remove_file 'app/assets/javascripts/application.js'
 create_file 'app/assets/javascripts/application.js.coffee', <<-COFFEESCRIPT
 # This is a manifest file that'll be compiled into application.js, which will include all the files
@@ -219,6 +222,9 @@ create_file 'app/assets/javascripts/application.js.coffee', <<-COFFEESCRIPT
 $(document).on 'ready page:load', ->
   NProgress.configure showSpinner: false
 COFFEESCRIPT
+
+run 'mkdir -p app/assets/stylesheets/components && touch app/assets/stylesheets/components/.gitkeep'
+run 'mkdir -p app/assets/stylesheets/pages && touch app/assets/stylesheets/components/.gitkeep'
 remove_file 'app/assets/stylesheets/application.css'
 create_file 'app/assets/stylesheets/application.css.sass', <<-SASS
 //= require _bootstrap-sprockets
