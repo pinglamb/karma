@@ -1,0 +1,9 @@
+<div class="flash-container go">
+  <% flash.each do |type, message| %>
+    <% type = :success if type.to_sym == :notice %>
+    <% type = :danger  if type.to_sym == :alert %>
+    <div class="alert fade in <%= "alert-#{type}" %>">
+      <%= message %>
+    </div>
+  <% end %>
+</div>
