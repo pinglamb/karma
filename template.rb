@@ -87,109 +87,6 @@ html(lang="en")
 
     = content_for :modal
 SLIM
-remove_file 'app/helpers/application_helper.rb'
-create_file 'app/helpers/application_helper.rb', <<-RUBY
-module ApplicationHelper
-  def namespace_name
-    controller_path.scan(/(.*)\\//).flatten.first
-  end
-
-  def match_namespace?(*args)
-    if args.first.nil? && namespace_name.nil?
-      true
-    else
-      namespace_name.in?(Array.wrap(args).flatten.collect(&:to_s))
-    end
-  end
-
-  def match_controller?(*args)
-    controller_name.in?(Array.wrap(args).flatten.collect(&:to_s))
-  end
-
-  def match_action?(*args)
-    action_name.in?(Array.wrap(args).flatten.collect(&:to_s))
-  end
-
-  def match_id?(*args)
-    params[:id].to_s.in?(Array.wrap(args).flatten.collect(&:to_s))
-  end
-
-  def match_params?(q)
-    q.all? do |key, values|
-      Array.wrap(values).any? do |value|
-        params[k] == value
-      end
-    end
-  end
-
-  def match_route?(*args)
-    args.flatten! if args.is_a?(Array)
-    Array.wrap(args).any? do |combination|
-      if m = combination.match(/^((?<namespace>.*)\\/)?(?<controller>.*)\\#(?<action>.*)$/)
-        (m[:namespace].blank? || match_namespace?(m[:namespace])) &&
-          match_controller?(m[:controller]) &&
-          match_action?(m[:action])
-      end
-    end
-  end
-
-  def active_if(predicates)
-    result_of(predicates) ? 'active' : ''
-  end
-
-  def disabled_if(predicates)
-    result_of(predicates) ? 'disabled' : ''
-  end
-
-  def yes_if(predicates)
-    result_of(predicates) ? 'Yes' : 'No'
-  end
-
-  def bootstrap_flash
-    render partial: 'layouts/shared/bootstrap_flash' if flash.present?
-  end
-
-  def image_tag_presence(image, options = {})
-    if image.present?
-      image_tag options[:url] || image, options
-    else
-      content_tag :img, nil, { data: { src: "holder.js/\\\#{options[:fallback]}/text::(" } }.merge(options)
-    end
-  end
-
-  def number_to_currency_presence(number, options = {})
-    if number.present?
-      number_to_currency number, options
-    else
-      'N/A'
-    end
-  end
-
-  def link_back_or_to(*args, &block)
-    if params[:back_to].present?
-      if block_given?
-        args[0] = params[:back_to]
-      else
-        args[1] = params[:back_to]
-      end
-    end
-
-    link_to(*args, &block)
-  end
-
-  private
-
-  def result_of(predicates)
-    if predicates.is_a?(Hash)
-      predicates.all? do |k, v|
-        send(:"match_\#{k}?", v)
-      end
-    else
-      predicates
-    end
-  end
-end
-RUBY
 
 run 'mkdir -p app/assets/javascripts/components && touch app/assets/javascripts/components/.gitkeep'
 run 'mkdir -p app/assets/javascripts/pages && touch app/assets/javascripts/components/.gitkeep'
@@ -245,14 +142,6 @@ run "cp config/database.yml config/database.yml.example"
 gsub_file '.rspec', '--color', '--color --format NyanCatFormatter'
 
 run 'mkdir -p app/views/layouts/shared'
-create_file 'app/views/layouts/shared/_bootstrap_flash.html.slim', <<-SLIM
-.flash-container.go
-  - flash.each do |type, message|
-    - type = :success if type.to_sym == :notice
-    - type = :danger  if type.to_sym == :alert
-    .alert.fade.in class="alert-\#{type}"
-      = message
-SLIM
 create_file 'app/views/layouts/shared/_you.html.slim', <<-SLIM
 - if user_signed_in?
   li.dropdown
