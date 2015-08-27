@@ -1,0 +1,21 @@
+.page-title
+  .pull-right
+    = link_to 'New <%= singular_table_name %>', new_<%= singular_table_name %>_url, class: 'btn btn-sm btn-success'
+  h1 <%= table_name %>
+  span.text-muted.count = pluralize(@<%= table_name %>.count, 'item')
+
+.content
+  table.table.table-list
+    thead
+      tr
+<%- attributes.each do |attribute| -%>
+        th <%= attribute.name %>
+<%- end -%>
+        th &nbsp;
+    tbody
+      - @<%= table_name %>.each do |<%= singular_table_name %>|
+        tr
+<%- attributes.each do |attribute| -%>
+          td = <%= singular_table_name %>.<%= attribute.name %>
+<%- end -%>
+          td = link_to 'Edit', <%= singular_table_name %>

@@ -38,6 +38,8 @@ rake 'db:migrate'
 generate 'rolify Role User'
 rake 'db:migrate'
 
+generate 'zen_admin:install'
+
 generate 'kaminari:views bootstrap3 -e slim'
 
 application "config.generators do |g|\n      g.stylesheets false\n      g.javascripts false\n      g.helper false\n      g.view_specs false\n      g.helper_specs false\n    end\n"
@@ -50,14 +52,14 @@ html(lang="en")
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
-    title= content_for?(:title) ? yield(:title) : "#{@app_name.capitalize}"
+    title = content_for?(:title) ? "\#{yield(:title)} | #{@app_name.capitalize}" : "#{@app_name.capitalize}"
     = csrf_meta_tags
     = stylesheet_link_tag "application", media: "all"
     /! Le HTML5 shim, for IE6-8 support of HTML elements
     /![if lt IE 9]
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
     = javascript_include_tag "application"
-    link(href="/favicon.ico" rel="shortcut icon")
+    = favicon_link_tag
 
   body class=content_for(:body)
     nav.navbar.navbar-inverse.navbar-fixed-top
@@ -86,6 +88,37 @@ html(lang="en")
       = bootstrap_flash
 
     = content_for :modal
+SLIM
+
+create_file 'app/views/layouts/devise.html.slim', <<-SLIM
+doctype 5
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    / meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+    title = content_for?(:title) ? "\#{yield(:title)} | #{@app_name.capitalize}" : "#{@app_name.capitalize}"
+    = csrf_meta_tags
+    = stylesheet_link_tag "application", media: "all"
+    /! Le HTML5 shim, for IE6-8 support of HTML elements
+    /![if lt IE 9]
+      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
+    = javascript_include_tag "application"
+    = favicon_link_tag
+
+  body class=content_for(:body)
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          = link_to "#{@app_name.capitalize}", root_path, class: 'navbar-brand'
+        ul.nav.navbar-nav.navbar-right
+          = render 'layouts/shared/you'
+
+    #main
+      #content.without-sidebar.without-sidemenu
+        = yield
+
+      = bootstrap_flash
 SLIM
 
 run 'mkdir -p app/assets/javascripts/components && touch app/assets/javascripts/components/.gitkeep'
