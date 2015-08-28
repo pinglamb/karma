@@ -1,0 +1,3 @@
+#!/bin/sh
+cd /home/app
+sudo -u app -H -E RAILS_ENV=production bundle exec sidekiq -q default -q mailers -e production -P /tmp/sidekiq.pid -d -L /home/app/log/sidekiq.log

@@ -1,0 +1,6 @@
+#!/bin/bash
+git fetch
+git fetch --tags
+git checkout $1
+docker build -t <%= @project %>/web:$1 .
+docker tag -f <%= @project %>/web:$1 <%= @project %>/web:latest

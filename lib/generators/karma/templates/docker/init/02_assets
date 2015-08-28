@@ -1,0 +1,3 @@
+#!/bin/sh
+cd /home/app
+sudo -u app -H -E RAILS_ENV=production bundle exec rake assets:precompile

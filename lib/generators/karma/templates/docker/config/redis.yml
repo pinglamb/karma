@@ -1,0 +1,4 @@
+production:
+  :url: "redis://<%%= ENV['REDIS_PORT_6379_TCP_ADDR'] %>:<%%= ENV['REDIS_PORT_6379_TCP_PORT'] %>"
+  :password: <%%= ENV['REDIS_PASSWORD'] %>
+  :namespace: '<%= @project %>-production'

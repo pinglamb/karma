@@ -1,0 +1,4 @@
+#!/bin/bash
+docker stop <%= @project %>
+docker rm <%= @project %>
+docker run --name <%= @project %> -d -p 8888:8888 -v /opt/<%= @project %>/log:/home/app/log -v /opt/<%= @project %>/assets:/home/app/public/assets -v /opt/<%= @project %>/tmp/cache:/home/app/tmp/cache --env-file ./.docker-env <%= @project %>/web:latest

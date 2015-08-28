@@ -1,0 +1,9 @@
+production:
+  adapter: mysql2
+  encoding: utf8
+  host: "<%%= ENV['MYSQL_PORT_3306_TCP_ADDR'] %>"
+  port: <%%= ENV['MYSQL_PORT_3306_TCP_PORT'] %>
+  database: "<%= @project %>_production"
+  pool: 10
+  username: "<%%= ENV['MYSQL_USERNAME'] %>"
+  password: "<%%= ENV['MYSQL_PASSWORD'] %>"
