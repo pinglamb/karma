@@ -1,5 +1,5 @@
 {
-  "name": "zen-admin dependencies",
+  "name": "karma dependencies",
   "dependencies": {
     "holderjs": "2.6.1",
     "underscore": "latest",

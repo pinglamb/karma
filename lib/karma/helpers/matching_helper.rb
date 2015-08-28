@@ -1,4 +1,4 @@
-module ZenAdmin
+module Karma
   module Helpers
     module MatchingHelper
       def namespace_name

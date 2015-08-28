@@ -1,6 +1,6 @@
 require 'simple_form'
 
-module ZenAdmin
+module Karma
   module Inputs
     class WysiwygInput < ::SimpleForm::Inputs::Base
       def input(wrapper_options)

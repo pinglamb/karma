@@ -17,7 +17,7 @@
 #= require nprogress-turbolinks
 #= require action_form
 #= require bootstrap
-#= require zen-admin
+#= require karma
 #= require_self
 #= require_tree ./components
 #= require_tree ./pages

@@ -1,8 +1,8 @@
-module ZenAdmin
+module Karma
   module Helpers
     module UsefulHelper
       def bootstrap_flash
-        render partial: 'zen-admin/bootstrap_flash' if flash.present?
+        render partial: 'karma/bootstrap_flash' if flash.present?
       end
 
       def image_tag_presence(image, options = {})

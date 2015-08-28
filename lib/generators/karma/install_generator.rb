@@ -1,8 +1,8 @@
 require 'rails/generators'
 
-module ZenAdmin
+module Karma
   class InstallGenerator < ::Rails::Generators::Base
-    desc 'Copy ZenAdmin Scaffold template files'
+    desc 'Copy Karma Scaffold template files'
     source_root ::File.expand_path('../templates', __FILE__)
 
     def copy_views

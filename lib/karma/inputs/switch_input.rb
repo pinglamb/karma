@@ -1,6 +1,6 @@
 require 'simple_form'
 
-module ZenAdmin
+module Karma
   module Inputs
     class SwitchInput < ::SimpleForm::Inputs::BooleanInput
       def input(wrapper_options)

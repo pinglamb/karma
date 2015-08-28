@@ -7,8 +7,8 @@
 #= require bootstrap-switch/dist/js/bootstrap-switch
 #= require bootstrap-file-input/bootstrap.file-input
 #= require_self
-#= require_tree ./zen-admin/libs
-#= require_tree ./zen-admin/components
+#= require_tree ./karma/libs
+#= require_tree ./karma/components
 
 $(document).on 'ready page:load', ->
   $('[data-toggle="tooltip"]').tooltip()

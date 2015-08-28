@@ -1,6 +1,6 @@
 run "rbenv local #{`rbenv global`}"
 
-inject_into_file 'Gemfile', %Q{\ngem 'zen-admin', github: 'pinglamb/zen-admin'}, after: /gem 'therubyracer'.*/
+inject_into_file 'Gemfile', %Q{\ngem 'karma', github: 'pinglamb/karma'}, after: /gem 'therubyracer'.*/
 assets_lib = %w(bourbon bootstrap-sass font-awesome-rails bower-rails).collect {|lib| %Q{\ngem '#{lib}'}}.join
 inject_into_file 'Gemfile', assets_lib, after: /gem 'therubyracer'.*/
 inject_into_file 'Gemfile', %Q{\n# Other Assets}, after: /gem 'therubyracer'.*/
@@ -38,7 +38,7 @@ rake 'db:migrate'
 generate 'rolify Role User'
 rake 'db:migrate'
 
-generate 'zen_admin:install'
+generate 'karma:install'
 
 generate 'kaminari:views bootstrap3 -e slim'
 
@@ -144,7 +144,7 @@ create_file 'app/assets/javascripts/application.js.coffee', <<-COFFEESCRIPT
 #= require nprogress-turbolinks
 #= require action_form
 #= require bootstrap
-#= require zen-admin
+#= require karma
 #= require_self
 #= require_tree ./components
 #= require_tree ./pages
@@ -162,11 +162,11 @@ create_file 'app/assets/stylesheets/application.css.sass', <<-SASS
 //= require font-awesome
 //= require nprogress
 //= require nprogress-bootstrap
-//= require zen-admin
+//= require karma
 
 @import "bourbon"
-@import "zen-admin/variables"
-@import "zen-admin/mixins"
+@import "karma/variables"
+@import "karma/mixins"
 SASS
 inject_into_file ".gitignore", "\n/config/database.yml", :after => "/.bundle"
 inject_into_file ".gitignore", "\n.DS_Store", :after => "/.bundle"

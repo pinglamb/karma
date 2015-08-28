@@ -1,4 +1,4 @@
-module ZenAdmin
+module Karma
   module Helpers
     module WhatIfHelper
       def active_if(predicates)

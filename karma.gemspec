@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'zen-admin/version'
+require 'karma/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "zen-admin"
-  spec.version       = ZenAdmin::VERSION
+  spec.name          = "karma"
+  spec.version       = Karma::VERSION
   spec.authors       = ["pinglamb"]
   spec.email         = ["pinglambs@gmail.com"]
 
-  spec.summary       = "Zen Admin Theme"
-  spec.homepage      = "https://github.com/pinglamb/zen-admin"
+  spec.summary       = "Karma Admin Theme"
+  spec.homepage      = "https://github.com/pinglamb/karma"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
