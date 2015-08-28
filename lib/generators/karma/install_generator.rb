@@ -2,7 +2,7 @@ require 'rails/generators'
 
 module Karma
   class InstallGenerator < ::Rails::Generators::NamedBase
-    desc 'Copy Karma Scaffold template files'
+    desc 'Install Karma Theme'
     source_root ::File.expand_path('../templates', __FILE__)
 
     def copy_application_layout
@@ -33,13 +33,6 @@ module Karma
     def copy_application_css
       remove_file 'app/assets/stylesheets/application.css'
       copy_file 'assets/application.css.sass', 'app/assets/stylesheets/application.css.sass'
-    end
-
-    def copy_views
-      copy_file 'views/index.html.slim', 'lib/templates/slim/scaffold/index.html.slim'
-      copy_file 'views/new.html.slim',   'lib/templates/slim/scaffold/new.html.slim'
-      copy_file 'views/edit.html.slim',  'lib/templates/slim/scaffold/edit.html.slim'
-      copy_file 'views/_form.html.slim', 'lib/templates/slim/scaffold/_form.html.slim'
     end
 
     def copy_devise_views

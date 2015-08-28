@@ -48,3 +48,4 @@ inject_into_file ".gitignore", "\n.DS_Store", :after => "/.bundle"
 gsub_file '.rspec', '--color', '--color --format NyanCatFormatter'
 
 generate "karma:install #{@app_name}"
+generate "karma:views"
