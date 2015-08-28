@@ -4,7 +4,7 @@
       .pull-right
         = f.button :submit, class: 'btn btn-success btn-sm'
         = link_back_or_to 'Back', <%= table_name %>_url, class: 'btn btn-sm btn-default'
-      h1 Edit <%= singular_table_name %>
+      h1 Edit <%= human_name %>
       p.small.text-muted Please enter the information below.
 
     = render '<%= table_name %>/form', f: f

@@ -1,7 +1,7 @@
 .page-title
   .pull-right
-    = link_to 'New <%= singular_table_name %>', new_<%= singular_table_name %>_url, class: 'btn btn-sm btn-success'
-  h1 <%= table_name %>
+    = link_to 'New <%= human_name %>', new_<%= singular_table_name %>_url, class: 'btn btn-sm btn-success'
+  h1 <%= human_name.pluralize %>
   span.text-muted.count = pluralize(@<%= table_name %>.count, 'item')
 
 .content
